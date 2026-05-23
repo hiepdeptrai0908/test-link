@@ -6,6 +6,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        html,
+        body {
+            height: 100%;
+            box-sizing: border-box;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+            font-size: 16px;
+            height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            background: #f7f9fc;
+            color: #0b1a2b;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 720px;
+            width: 100%;
+            margin: 48px auto 0;
+            padding: 32px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(7, 22, 41, 0.06);
+        }
+
+        .input-row {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            align-items: stretch;
+            margin-bottom: 12px;
+        }
+
+        .input-row label {
+            font-weight: 600;
+            margin-right: 0;
+            margin-bottom: 6px;
+        }
+
+        #hrefInput {
+            padding: 10px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            width: 100%;
+            outline: none;
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.02);
+            font-size: 16px;
+            min-height: 80px;
+            resize: vertical;
+            line-height: 1.4;
+        }
+
+        #hrefInput:focus {
+            border-color: #4c7ef3;
+            box-shadow: 0 0 0 4px rgba(76, 126, 243, 0.12);
+        }
+
         .btn {
             display: inline-block;
             padding: 12px 24px;
@@ -14,13 +76,33 @@
             text-decoration: none;
             border-radius: 999px;
             font-weight: 600;
+            margin-left: 0;
+            margin-top: 8px;
         }
     </style>
 </head>
 
 <body>
-    <div>a tag: href="hardoff-offer://delivery_purchase_complete"</div>
-    <a href="hardoff-offer://delivery_purchase_complete" class="btn">アプリを開く</a>
+    <div class="container">
+        <div class="input-row">
+            <label for="hrefInput">Href:</label>
+            <textarea id="hrefInput" rows="3">hardoff-offer://delivery_purchase_complete</textarea>
+        </div>
+        <a id="openAppBtn" href="hardoff-offer://delivery_purchase_complete" class="btn">リンクを開く</a>
+    </div>
+
+    <script>
+        // Cập nhật href của nút theo input
+        (function () {
+            const input = document.getElementById('hrefInput');
+            const btn = document.getElementById('openAppBtn');
+            function update() {
+                btn.href = input.value || '#';
+            }
+            input.addEventListener('input', update);
+            update();
+        })();
+    </script>
 </body>
 
 </html>
